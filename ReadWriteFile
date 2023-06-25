@@ -1,0 +1,17 @@
+'Content=ReadTXTfile(PathFile) 'NEW
+Function ReadTXTfile(ByVal filename As String) As String
+    On Error Resume Next: Err.Clear
+    Set FSO = CreateObject("scripting.filesystemobject")
+    Set ts = FSO.OpenTextFile(filename, 1, True): ReadTXTfile = ts.ReadAll: ts.Close
+    Set ts = Nothing: Set FSO = Nothing
+End Function
+
+'res=SaveTXTfile(PathFile,Content) 'NEW
+Function SaveTXTfile(ByVal filename As String, ByVal txt As String) As Boolean
+    On Error Resume Next: Err.Clear
+    Set FSO = CreateObject("scripting.filesystemobject")
+    Set ts = FSO.CreateTextFile(filename, True)
+    ts.Write txt: ts.Close
+    SaveTXTfile = Err = 0
+    Set ts = Nothing: Set FSO = Nothing
+End Function
